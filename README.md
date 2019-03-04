@@ -1,7 +1,7 @@
 # Getting Started
 Starting with version 1.2, Devise supports integration with OmniAuth. This tutorial will cover the basics of using the OAuth provider for this integration.
-
 Starting with version 1.5, Devise supports OmniAuth 1.0 forwarding, which will be the version covered in this tutorial
+
 
 # Installation
 first of all, you need to know how to install and configure these gem below before you're getting started
@@ -47,7 +47,7 @@ after you added this code you need to generate this model call service that have
  * auth (text)
 after you generate model service you need to add this huge code
 ~~~ruby
-%w{ facebook twitter }.each do |provider|
+  %w{ facebook twitter }.each do |provider|
     scope provider, ->{ where(provider: provider) }
   end
 
@@ -152,5 +152,29 @@ after that add this
     )
   end
 ```
+
+# Finale
+If you have home controller as root page you need to defined to you action
+```
+ def index
+   facebook = current_user.services.facebook.last
+   if facebook.present?
+     @graph = facebook.client
+     page_params = params.permit!.to_h[:page]
+     @results = params[:page] ? @graph.get_page(page_params) : @graph.get_connections("me", "feed")
+   else
+     @results = []
+   end
+ end
+```
+# Conclusion
+You need to create facebook app to get app_id and app_secret and then add this code to secrets.yml
+~~~
+/config/screts.yml
+development:
+  ...
+  facebook_app_id: your_app_id
+  facebook_app_secret: your_app_secret
+~~~
 
 
