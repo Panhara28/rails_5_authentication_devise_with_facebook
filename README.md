@@ -14,11 +14,29 @@ gem "koala"
 then ``` bundle install ```
 # Configuration
 If you install devise gem you will have devise.rb file and then add this line to that file locate at: 
-```
-/config/initialize/devise.rb
-```
 ~~~ruby
+/config/initialize/devise.rb
 config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret, scope: 'email,user_posts'
 ~~~
+If you install koala you will also have that configuration file locate at: 
+~~~ruby
+/config/initialize/koala.rb
+config.app_id = Rails.application.secrets.facebook_app_id
+ config.app_secret = Rails.application.secrets.facebook_app_secret
+~~~
+after you configure these two files you need to go to routes.rb to defined route like this: 
+~~~ruby
+devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+~~~
+# Model
+after you install devise gem you will need to generate for model call user
+```
+rails g devise user
+```
+and then make sure that code is added to the user.rb file locate at: 
+~~~ruby
+devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+~~~
+
 
 
