@@ -1,9 +1,11 @@
 # Getting Started
+
 Starting with version 1.2, Devise supports integration with OmniAuth. This tutorial will cover the basics of using the OAuth provider for this integration.
 Starting with version 1.5, Devise supports OmniAuth 1.0 forwarding, which will be the version covered in this tutorial
 
 
 # Installation
+
 first of all, you need to know how to install and configure these gem below before you're getting started
 
 ```
@@ -12,7 +14,9 @@ gem "omniauth-facebook"
 gem "koala"
 ```
 then ``` bundle install ```
+
 # Configuration
+
 If you install devise gem you will have devise.rb file and then add this line to that file locate at: 
 ~~~ruby
 /config/initialize/devise.rb
@@ -29,6 +33,7 @@ after you configure these two files you need to go to routes.rb to defined route
 devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 ~~~
 # Model
+
 after you install devise gem you will need to generate for model call user
 ```
 rails g devise user
@@ -75,6 +80,7 @@ after you generate model service you need to add this huge code
 ~~~
 
 # Controller
+
 If you have done the step below you need to write code to controller so
 ### step 1 
 you need to generate devise scope user controller with omniauth_callbacks_controller.rb and write this code below
@@ -83,7 +89,7 @@ rails g devise:controllers users
 ```
 and you will have this file ```/controllers/users/omniauth_callbacks_controller.rb```
 after that add this
-```
+~~~ruby
   before_action :set_service
   before_action :set_user
   
@@ -151,11 +157,11 @@ after that add this
       password: Devise.friendly_token[0,20]
     )
   end
-```
+~~~
 
 # Finale
 If you have home controller as root page you need to defined to you action
-```
+~~~ruby
  def index
    facebook = current_user.services.facebook.last
    if facebook.present?
@@ -166,10 +172,11 @@ If you have home controller as root page you need to defined to you action
      @results = []
    end
  end
-```
+~~~
+
 # Conclusion
 You need to create facebook app to get app_id and app_secret and then add this code to secrets.yml
-~~~
+~~~ruby
 /config/screts.yml
 development:
   ...
