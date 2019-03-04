@@ -170,7 +170,7 @@ end
 ~~~
 
 # Finale
-If you have home controller as root page you need to defined to you action
+If you have home controller as root page you need to defined this code in your action
 ~~~ruby
  def index
    facebook = current_user.services.facebook.last
