@@ -82,11 +82,15 @@ after you generate model service you need to add this huge code
 # Controller
 
 If you have done the step below you need to write code to controller so
+
 ### step 1 
+
 you need to generate devise scope user controller with omniauth_callbacks_controller.rb and write this code below
 ```
 rails g devise:controllers users
 ```
+### step 2
+
 and you will have this file ```/controllers/users/omniauth_callbacks_controller.rb```
 after that add this
 ~~~ruby
