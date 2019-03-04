@@ -52,6 +52,9 @@ after you added this code you need to generate this model call service that have
  * auth (text)
 after you generate model service you need to add this huge code
 ~~~ruby
+class Service < ApplicationRecord
+  belongs_to :user
+  
   %w{ facebook twitter }.each do |provider|
     scope provider, ->{ where(provider: provider) }
   end
@@ -77,6 +80,7 @@ after you generate model service you need to add this huge code
     new_token_info = Koala::Facebook::OAuth.new.exchange_access_token_info(token)
     update(access_token: new_token_info["access_token"], expires_at: Time.zone.now + new_token_info["expires_in"])
   end
+end
 ~~~
 
 # Controller
@@ -94,6 +98,7 @@ rails g devise:controllers users
 and you will have this file ```/controllers/users/omniauth_callbacks_controller.rb```
 after that add this
 ~~~ruby
+class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :set_service
   before_action :set_user
   
@@ -161,6 +166,7 @@ after that add this
       password: Devise.friendly_token[0,20]
     )
   end
+end
 ~~~
 
 # Finale
