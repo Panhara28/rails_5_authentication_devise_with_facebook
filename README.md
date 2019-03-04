@@ -38,12 +38,12 @@ and then make sure that code is added to the user.rb file locate at:
 devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 ~~~
 after you added this code you need to generate this model call service that have these attributes:
- *provider
- *uid (string)
- *access_token (string)
- *access_token_secret (string)
- *refresh_token (string)
- *expired_at (date)
- *auth (text)
+ * provider
+ * uid (string)
+ * access_token (string)
+ * access_token_secret (string)
+ * refresh_token (string)
+ * expired_at (date)
+ * auth (text)
 
 
