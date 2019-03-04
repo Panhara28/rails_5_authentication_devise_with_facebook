@@ -13,7 +13,10 @@ gem "koala"
 ```
 then ``` bundle install ```
 # Configuration
-If you install devise gem you will have devise.rb file and then add this line to that file
+If you install devise gem you will have devise.rb file and then add this line to that file locate at: 
+```
+/config/initialize/devise.rb
+```
 ~~~ruby
 config.omniauth :facebook, Rails.application.secrets.facebook_app_id, Rails.application.secrets.facebook_app_secret, scope: 'email,user_posts'
 ~~~
