@@ -22,7 +22,7 @@ If you install koala you will also have that configuration file locate at:
 ~~~ruby
 /config/initialize/koala.rb
 config.app_id = Rails.application.secrets.facebook_app_id
- config.app_secret = Rails.application.secrets.facebook_app_secret
+config.app_secret = Rails.application.secrets.facebook_app_secret
 ~~~
 after you configure these two files you need to go to routes.rb to defined route like this: 
 ~~~ruby
@@ -37,6 +37,13 @@ and then make sure that code is added to the user.rb file locate at:
 ~~~ruby
 devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 ~~~
-
+after you added this code you need to generate this model call service that have these attributes:
+*provider
+*uid (string)
+*access_token (string)
+*access_token_secret (string)
+*refresh_token (string)
+*expired_at (date)
+*auth (text)
 
 
